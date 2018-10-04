@@ -72,7 +72,26 @@
            
               <h3 class="modal-title">Rules</h3>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-            
+                <br>
+            </div>
+            <div class="modal-body">
+            <ul>
+            <li>THIS IS CHOICE DRIVEN GAME</li>
+            <li>YOUR CHOICES DEFINE YOUR PATH WHICH DEFINE THE QUESTIONS</li>
+            <li>THE GAME CONSISTS OF 60 CHECKPOINTS EACH WITH 3 CHOICES</li>
+            <br>
+            <li>On choosing the "Best" route you will get +8 points</li>
+            <br>
+            <li>On choosing the "Long" route you will get +5 points</li>    
+            <br>
+            <li>On choosing the "Dead End " you will get +3 points</li>
+            <br>
+            <li>LETS SEE WHO SAVES MANIPAL FROM THE HANDS OF AN AI INVASION</li>
+                
+                
+                
+                
+            </ul>
           </div>
           <div class="modal-body">
           </div>
@@ -86,6 +105,36 @@
             <h3 class="modal-title">Contact</h3>
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <br>
+          </div>
+            <div class="modal-body">
+            <center>
+                    <br />
+                    <br />
+                    <div class="table-responsive">
+                      <table class="table table-striped table-bordered table-condensed">
+                        <thead>
+                          <tr>
+                            <td>NAME</td>
+                            <td>CONTACT NUMBER</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>AKSHAY KUMAR</td>
+                            <td>+917982041005</td>
+                            </tr>
+                            <tr>
+                            <td>DAKSH DEV</td>
+                            <td>+919996988054</td>
+                            </tr>
+                            <tr>
+                            <td>NAMAN TYAGI</td>
+                            <td>+918105659072</td>
+                            </tr>
+                        </tbody>
+                      </table>
+                    </div>  
+                  </center>
           </div>
           <div class="modal-body">
           </div>

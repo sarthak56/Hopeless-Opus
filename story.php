@@ -1,6 +1,5 @@
 <?php
   include("session.php");
-  var_dump($_SESSION);
   $uid=$_SESSION['regno'];
   $status_query="SELECT ststatus from login where regno='$uid'";
   $status_result=mysqli_query($conn,$status_query);
@@ -60,7 +59,26 @@
            
               <h3 class="modal-title">Rules</h3>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-            
+                <br>
+            </div>
+            <div class="modal-body">
+            <ul>
+            <li>THIS IS CHOICE DRIVEN GAME</li>
+            <li>YOUR CHOICES DEFINE YOUR PATH WHICH DEFINE THE QUESTIONS</li>
+            <li>THE GAME CONSISTS OF 60 CHECKPOINTS EACH WITH 3 CHOICES</li>
+            <br>
+            <li>On choosing the "Best" route you will get +8 points</li>
+            <br>
+            <li>On choosing the "Long" route you will get +5 points</li>    
+            <br>
+            <li>On choosing the "Dead End " you will get +3 points</li>
+            <br>
+            <li>LETS SEE WHO SAVES MANIPAL FROM THE HANDS OF AN AI INVASION</li>
+                
+                
+                
+                
+            </ul>
           </div>
           <div class="modal-body">
           </div>
@@ -134,31 +152,31 @@
 </div>
 <div id="story">
     <div id="particles-js"></div>
-    <div class=container>
-        <div class="row container-fluid">
+    <div class="container">
+        <div class="row container-fluid justify-content-center">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding">
-                    <div class="box">
-                           <p style="text-align:center; font-size: 20px; color: white;" id="margin_given"> <?php echo $story_row['story']; ?></p>
+                    <div class="border spacer2">
+                        <p style="text-align:center; font-size: 20px; color: white;"><b> <?php echo $story_row['story']; ?></b></p>
                     </div>
                 </div>
         </div>
     </div>
 </div>
-<div id="options">
-    <div class=container>
+<div id="options" class="spacer">
+    <div class="container">
         <div class="row row2">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="box">
+                    <div class="border border-success  rounded">
                         <a href="story_process.php?choice=1" style="z-index:1000; color:white; text-decoration:none;"><p style="font-size: 18px;"><?php echo $story_row['choice1']; ?></p></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="box">
+                    <div class="border border-warning rounded">
                         <a href="story_process.php?choice=2" style="z-index:1000; color:white; text-decoration:none;"><p style="font-size: 18px;"><?php echo $story_row['choice2']; ?></p></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="box">
+                    <div class="border border-danger rounded">
                           <a href="story_process.php?choice=3" style="z-index:1000; color:white; text-decoration:none;"><p style="font-size: 18px;"><?php echo $story_row['choice3']; ?></p></a>
                     </div>
                 </div>
@@ -206,6 +224,30 @@ h1{
     #margin_given{
         margin-left:0%;}
 }
+
+ .box{
+    border-radius: 10px 10px;
+    background: linear-gradient(to bottom right, #dedce8, #f9f9f9,#1111);
+    opacity: 0.2;
+    margin-bottom: 5%;
+     
+}
+        p{
+            opacity: 1 !important;
+            color:white;
+            padding:10px !important;
+        }
+        .spacer{
+            margin-top:70px;
+        }
+        .spacer2{
+            margin-top:100px;
+        }
+        @media screen and (max-width: 700px){
+            .spacer2{
+                margin-top:20px;
+            }
+        }
     </style>
 
     <script>

@@ -25,10 +25,23 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="question.css">
     
-    
+      <script>
+         function myFunction(){
+           console.log("function called");
+           var x=window.location.href;
+           var element=document.getElementById("changer");
+           if(x.indexOf('?ans=0')>0){
+               console.log("found then border not working");
+               element.classList.add("border-danger");
+               
+           }
+        }
+   
+   
+    </script>
 </head>
 
-<body>
+<body onload="myFunction()">
 
 <div class="nav navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
@@ -64,7 +77,26 @@
            
               <h3 class="modal-title">Rules</h3>
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-            
+                <br>
+            </div>
+            <div class="modal-body">
+            <ul>
+            <li>THIS IS CHOICE DRIVEN GAME</li>
+            <li>YOUR CHOICES DEFINE YOUR PATH WHICH DEFINE THE QUESTIONS</li>
+            <li>THE GAME CONSISTS OF 60 CHECKPOINTS EACH WITH 3 CHOICES</li>
+            <br>
+            <li>On choosing the "Best" route you will get +8 points</li>
+            <br>
+            <li>On choosing the "Long" route you will get +5 points</li>    
+            <br>
+            <li>On choosing the "Dead End " you will get +3 points</li>
+            <br>
+            <li>LETS SEE WHO SAVES MANIPAL FROM THE HANDS OF AN AI INVASION</li>
+                
+                
+                
+                
+            </ul>
           </div>
           <div class="modal-body">
           </div>
@@ -137,11 +169,11 @@
       </div>
 </div>
 <div id="story">
-    <div class=container>
+    <div class="container" style="margin-top:13%; margin-bottom:3%;">
         <div class="row justify-content-center">
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 md-offset-8">
-                    <div class="box">
-                           <h1 style="opacity:1; color: black; margin-top:20%;" ><?php echo $question_row['question']; ?>  </h1>
+                    <div class="border" id="changer">
+                           <h3 style="opacity:1; color: white; padding:10px; text-align:center;" ><?php echo $question_row['question']; ?>  </h3>
                     </div>
                 </div>
         </div>
@@ -155,7 +187,7 @@
         </div>
         <br>
         <div class="container row justify-content-center">
-            <button type="submit" class="btn btn-default"  style="z-index:1000;"><b>Submit</b></button></div>
+            <button type="submit" class="btn btn-success"  style="z-index:1000;"><b>Submit</b></button></div>
     </div>
 </div>
 </form>
@@ -305,5 +337,8 @@ h1{
             "retina_detect": true
         });
     </script>
+
+
+
 </body>
 </html>
