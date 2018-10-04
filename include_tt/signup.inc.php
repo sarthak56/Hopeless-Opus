@@ -14,11 +14,6 @@ if(isset($_POST['submit'])){
         exit();
     }
     else{
-        if(!preg_match("/^[a-zA-Z]*$/", $name)){
-            header("Location: ../signup.php?signup=invalid");
-            exit();
-        }
-        else{
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 header("Location: ../signup.php?signup=email");
                 exit();
@@ -38,7 +33,6 @@ if(isset($_POST['submit'])){
                     exit();
                 }
             }
-        }
     }
 } 
 else{
