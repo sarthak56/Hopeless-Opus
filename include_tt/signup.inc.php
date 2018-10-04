@@ -1,7 +1,7 @@
 <?php
 
 if(isset($_POST['submit'])){ 
-    include_once 'dbh.inc.php';
+    include_once '../config.php';
     
     $name=mysqli_real_escape_string($conn, $_POST['name']);
     $regno=mysqli_real_escape_string($conn, $_POST['regno']);
@@ -23,7 +23,7 @@ if(isset($_POST['submit'])){
                 header("Location: ../signup.php?signup=email");
                 exit();
             } else{
-                $sql = "SELECT * FROM user WHERE regno='$regno' ";
+                $sql = "SELECT * FROM login WHERE regno='$regno' ";
                 $result = mysqli_query($conn, $sql);
                 $resultCheck = mysqli_num_rows($result);
                 
@@ -31,8 +31,8 @@ if(isset($_POST['submit'])){
                     header("Location: ../signup.php?signup=usertaken");
                     exit();
                 } else{
-                    $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO user (name,regno,email,phone,pwd,score,status) VALUES ('$name', '$regno', '$email', '$phone', '$hashedPwd', '$score','$status');";
+                    // $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
+                    $sql = "INSERT INTO login (Name,regno,emailid,num,pass) VALUES ('$name', '$regno', '$email', '$phone', '$pwd');";
                     mysqli_query($conn,$sql);
                     header("Location: ../signup.php?signup=success");
                     exit();

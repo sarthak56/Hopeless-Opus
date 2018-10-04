@@ -1,19 +1,35 @@
+<?php
+  include("session.php");
+  if(!isset($_SESSION['limit'])) {
+    header("Location:story.php");
+  }
+  $uid=$_SESSION['regno'];
+  $status_query="SELECT ststatus from login where regno='$uid'";
+  $status_result=mysqli_query($conn,$status_query);
+  $status_row=mysqli_fetch_assoc($status_result);
+  $state=$status_row['ststatus'];
+  $qno=$_SESSION['qcount'];
+  $question_query="SELECT question from questions where pid='$state' and sid='$qno'";
+  $question_result=mysqli_query($conn,$question_query);
+  $question_row=mysqli_fetch_assoc($question_result);
+?>
 <!DOCTYPE html>
-<html lang="en">
-    
+<html>
 <head>
     <title>Hopeless Opus-ACUMEN</title>
-  <meta charset="utf-8">
+    <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="story.css">
+    <link rel="stylesheet" href="question.css">
+    
     
 </head>
 
 <body>
+
 <div class="nav navbar navbar-expand-md bg-dark navbar-dark">
   <!-- Brand -->
   <a class="navbar-brand" href="#">HOPELESS OPUS</a>
@@ -24,34 +40,23 @@
   </button>
 
   <!-- Navbar links -->
-<div class="collapse navbar-collapse" id="collapsibleNavbar" style="float:right;">
+<div class="collapse navbar-collapse" id="collapsibleNavbar">
       <ul class="nav navbar-nav navbar-left">
       <li class="nav-item">
-        <a class="nav-link" data-toggle="modal" data-target="#Modalrules" >RULES</a>
+        <a class="nav-link" data-toggle="modal" data-target="#Modalrules">RULES</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="modal" data-target="#Modalleaderboard" >LEADERBOARD</a>
+        <a class="nav-link" data-toggle="modal" data-target="#Modalleaderboard">LEADERBOARD</a>
       </li>
       </ul>
        <ul class="nav navbar-nav navbar-right">
       <li class="nav-item">
-        <a class="nav-link" data-toggle="modal" data-toggle="modal" data-target="#Modallogout" >LOGOUT</a>
+        <a class="nav-link" data-toggle="modal" data-toggle="modal" data-target="#Modallogout">LOGOUT</a>
       </li> 
     </ul>
 </div>
 </div>
-<div id="story">
-    <div id="particles-js"></div>
-    <div class=container>
-        <div class="row container-fluid">
-                <div class="col-lg-8 col-md-9 col-sm-12 col-xs-12 padding">
-                    <div class="box">
-                           <h1 style="text-align:center;" id="margin_given"> Story</h1>
-                    </div>
-                </div>
-        </div>
-    </div>
-</div>
+     <div id="particles-js"></div>
 <div id="Modalrules" class="modal fade" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -75,12 +80,12 @@
             <button type="button" class="close" data-dismiss="modal">&times;</button>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left logy" >Yes</button>
+            <button type="button" class="btn btn-default pull-left logy">Yes</button>
             <button type="button" class="btn btn-default pull-right logn" data-dismiss="modal">No</button>
           </div>
         </div>
       </div>
-</div>  
+</div>
 <div id="Modalleaderboard" class="modal fade" role="dialog"  data-keyboard="false">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -90,45 +95,75 @@
             <br>
           </div>
           <div class="modal-body">
+            <center>
+                    <br />
+                    <br />
+                    <div class="table-responsive">
+                      <table class="table table-striped table-bordered table-condensed">
+                        <thead>
+                          <tr>
+                            <td>RANK</td>
+                            <td>USER ID</td>
+                            <td>SCORE</td>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <?php
+                            $rank=1;
+                            $leader_query="SELECT name,regno,score FROM login ORDER BY SCORE DESC,timelast ASC";
+                            $leader_result=mysqli_query($conn,$leader_query);
+                            $leader_count=mysqli_num_rows($leader_result);
+                            while($leader_count>0)
+                            {
+                              $leader_row=mysqli_fetch_assoc($leader_result);
+                              echo "<tr>";
+                              echo "<td>{$rank}</td>";
+                              echo "<td>{$leader_row['regno']}</td>";
+                                echo "<td>{$leader_row['score']}</td>";
+                              echo "</tr>";
+                              $rank++;
+                              if($rank==6)
+                                break;
+                              $leader_count-=1;
+                            }
+                            
+                          ?>
+                        </tbody>
+                      </table>
+                    </div>  
+                  </center>
           </div>
         </div>
       </div>
 </div>
-<div id="options">
+<div id="story">
     <div class=container>
-        <div class="row row2">
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+        <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 md-offset-8">
                     <div class="box">
-                        <a href="" style="z-index:1000; color:white; text-decoration:none;"><h3 >BEST</h3></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="box">
-                        <a href="" style="z-index:1000; color:white; text-decoration:none;"><h3 >Long</h3></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                    <div class="box">
-                          <a href="" style="z-index:1000; color:white; text-decoration:none;"><h3 >DEADEND</h3></a>
+                           <h1 style="opacity:1; color: black; margin-top:20%;" ><?php echo $question_row['question']; ?>  </h1>
                     </div>
                 </div>
         </div>
     </div>
 </div>
-</body>
-</html>
-
-<!--##############-->
-
-
-    <!-- particles.js container --> 
-
-<!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> 
+<form action="question_process.php" method="POST">
+<div id="mcq" class="container justify-content-center">
+    <div class="container row justify-content-center">
+         <div class="form-group field col-lg-4 justify-content-center">
+            <input type="txt" class="form-control" id="answer" placeholder="Enter Answer" name="ans">
+        </div>
+        <br>
+        <div class="container row justify-content-center">
+            <button type="submit" class="btn btn-default"  style="z-index:1000;"><b>Submit</b></button></div>
+    </div>
+</div>
+</form>
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         body {
   margin: 0;
-  background-color: #17182f;
+  background-color: #111111;
             overflow: hidden;
 }
 
@@ -162,7 +197,7 @@ h1{
         particlesJS("particles-js", {
             "particles": {
                 "number": {
-                    "value": 555,
+                    "value": 355,
                     "density": {
                         "enable": true,
                         "value_area": 789.1476416322727
@@ -193,7 +228,7 @@ h1{
                         "enable": true,
                         "speed": 2,
                         "opacity_min": 0,
-                        "sync": false
+                        "sync": true
                     }
                 },
                 "size": {
@@ -203,14 +238,14 @@ h1{
                         "enable": true,
                         "speed": 8,
                         "size_min": 0,
-                        "sync": false
+                        "sync": true
                     }
                 },
                 "line_linked": {
                     "enable": false,
                     "distance": 150,
                     "color": "#ffffff",
-                    "opacity": 0.4,
+                    "opacity": 0.8,
                     "width": 1
                 },
                 "move": {
@@ -220,7 +255,7 @@ h1{
                     "random": true,
                     "straight": false,
                     "out_mode": "out",
-                    "bounce": false,
+                    "bounce": true,
                     "attract": {
                         "enable": false,
                         "rotateX": 900,
@@ -270,4 +305,5 @@ h1{
             "retina_detect": true
         });
     </script>
-
+</body>
+</html>

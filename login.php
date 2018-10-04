@@ -42,7 +42,7 @@
 						</span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "Registration Number is required">
-						<input class="input100" type="number" name="regno" >
+						<input class="input100" type="text" name="regno" >
 						<span class="focus-input100"></span>
 					</div>
 					
